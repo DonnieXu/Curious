@@ -1,19 +1,7 @@
 package com.cn.curious.controller;
 
 import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;  
 import javax.servlet.http.HttpServletRequest;  
-  
-
-
-
-
-
-
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;  
@@ -64,6 +52,18 @@ public class UserController {
     	HashMap<String, String> inlines = new HashMap<String, String>();
     	inlines.put("dog", "/images/dog.jpg");
     	mailService.sendHtmlMail(from, to, subject, content, inlines, null);
+    	return "sendMailResult";
+    }
+    
+    @RequestMapping("/sendAttachmentMail")
+    public String sendAttachmentMail(){
+    	String from = "ch2_27@sina.com";
+    	String subject = "Images";
+    	String to = "604865895@qq.com";
+    	String content = "Hay baby~<br/>";
+    	HashMap<String, String> attachments = new HashMap<String, String>();
+    	attachments.put("dog.jpg", "/images/dog.jpg");
+    	mailService.sendHtmlMail(from, to, subject, content, null, attachments);
     	return "sendMailResult";
     }
 }  
