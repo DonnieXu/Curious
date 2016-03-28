@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.curious</groupId>
-  <artifactId>curious</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>curious Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <properties>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.curious</groupId>
+	<artifactId>curious</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>curious Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
 		<!-- spring版本号 -->
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
@@ -15,6 +15,7 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.18</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<activemq.version>5.9.0</activemq.version>
 	</properties>
 
 	<dependencies>
@@ -70,6 +71,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
@@ -97,7 +103,7 @@
 			<version>1.2.2</version>
 		</dependency>
 		<!-- 导入java ee jar 包 -->
-		  <dependency>
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
@@ -127,8 +133,19 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-		
-		
+		<!-- activemq -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>4.5</version>
+		</dependency>
+
+
 		<!-- 格式化对象，方便输出日志 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -155,12 +172,12 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.7.2</version>
 		</dependency>
-		
-		<dependency>  
-    		<groupId>com.fasterxml.jackson.core</groupId>  
-    		<artifactId>jackson-databind</artifactId>  
-    		<version>2.7.2</version>  
-		</dependency> 
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.2</version>
+		</dependency>
 		<!-- 上传组件包 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -177,10 +194,20 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-			
+
 	</dependencies>
-	
-  <build>
-    <finalName>curious</finalName>
-  </build>
+
+	<build>
+		<finalName>curious</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

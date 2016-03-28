@@ -1,6 +1,6 @@
 package com.cn.curious.dao;
 
-import com.cn.curious.pojo.User;
+import com.cn.curious.bean.User;
 
 public interface IUserDao {
     int deleteByPrimaryKey(Integer id);
